@@ -35,16 +35,21 @@
       </div>
     </div>
 
-    <div aria-hidden class="lg:hidden h-px w-full bg-gray-900 opacity-20 mt-2.5 mb-4"></div>
+    <div aria-hidden="true" class="lg:hidden h-px w-full bg-gray-900 opacity-20 mt-2.5 mb-4"></div>
 
     <div class="flex items-center gap-3 lg:gap-2 flex-wrap lg:justify-end lg:w-1/2 lg:mr-2">
-      <card-tag-button v-for="i in [role, level, ...languages, ...tools]" :key="i" :tag-label="i" />
+      <card-tag-button
+        v-for="i in [role, level, ...languages, ...tools]"
+        :key="i"
+        :tag-label="i"
+        @click="$emit('tag-select', i)"
+      />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { defineProps } from 'vue';
+import { defineEmit, defineProps } from 'vue';
 
 import CardChip from './Chip.vue';
 import CardTagButton from './TagButton.vue';
@@ -64,4 +69,6 @@ defineProps<{
   languages: string[];
   tools: string[];
 }>();
+
+defineEmit(['tag-select']);
 </script>
