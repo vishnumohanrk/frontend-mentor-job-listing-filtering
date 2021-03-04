@@ -9,14 +9,24 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
 import AppCard from '../components/card/Card.vue';
 import FilterContainer from '../components/filter/FilterContainer.vue';
 import FilterTag from '../components/filter/FilterTag.vue';
 import data from '../utils/data.json';
 
-const selectedTags = ref<string[]>([]);
+const router = useRouter();
+const { query } = useRoute();
+
+const initialFilter = computed(() => {
+  const s = query.filter as string | null;
+  if (!s) return [];
+  return s.split(',');
+});
+
+const selectedTags = ref<string[]>(initialFilter.value);
 
 const handleTagSelect = (i: string) => {
   if (!selectedTags.value.includes(i)) selectedTags.value = [...selectedTags.value, i];
@@ -38,4 +48,6 @@ const finalList = computed(() =>
       })
     : data,
 );
+
+watch(selectedTags, newValue => router.replace({ query: { filter: newValue.join(',') } }));
 </script>
