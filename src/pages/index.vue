@@ -20,13 +20,13 @@ import data from '../utils/data.json';
 const router = useRouter();
 const { query } = useRoute();
 
-const initialFilter = computed(() => {
+const initialFilter = () => {
   const s = query.filter as string | null;
   if (!s) return [];
   return s.split(',');
-});
+};
 
-const selectedTags = ref<string[]>(initialFilter.value);
+const selectedTags = ref<string[]>(initialFilter());
 
 const handleTagSelect = (i: string) => {
   if (!selectedTags.value.includes(i)) selectedTags.value = [...selectedTags.value, i];
