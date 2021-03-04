@@ -12,11 +12,14 @@ module.exports = {
       borderWidth: {
         6: '6px',
       },
+      spacing: {
+        5.5: '1.375rem',
+      },
     },
   },
   variants: {
     extend: {
-      textColor: ['group-hover', 'active'],
+      textColor: ['active'],
       backgroundColor: ['active'],
     },
   },

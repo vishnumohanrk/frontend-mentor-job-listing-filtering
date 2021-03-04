@@ -4,6 +4,7 @@
       {{ filterLabel }}
     </p>
     <button
+      aria-label="remove"
       type="button"
       class="p-2.5 rounded-r transition-colors bg-desaturated-dark-cyan hover:bg-very-dark-grayish-cyan text-white focus:outline-none focus:ring-2"
       @click="$emit('remove', filterLabel)"
